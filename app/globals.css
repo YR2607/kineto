@@ -1,26 +1,368 @@
 @import "tailwindcss";
 
+/* ============================================================================
+   Hey Low — Design System Tokens
+   botanical field journal on cream paper
+   ============================================================================ */
+
+@theme {
+  /* Colors */
+  --color-forest-ink: #003329;
+  --color-chartreuse-sprig: #e6ffa3;
+  --color-deep-moss: #042725;
+  --color-vivid-lime: #9bff48;
+  --color-mist-paper: #e5e7eb;
+  --color-white-sheet: #ffffff;
+  --color-graphite: #000000;
+  --color-sage-dust: #52756e;
+  --color-pine-shadow: #33544c;
+
+  /* Typography — Font Families
+     Substitute: Inter for UntitledSans, DM Serif Display Italic for BoogyBrutPoster */
+  --font-untitledsans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-boogybrutposter: var(--font-dm-serif-display), ui-serif, Georgia, serif;
+  --font-sans-serif: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Typography — Scale (named steps) */
+  --text-caption: 12px;
+  --leading-caption: 1.2;
+  --tracking-caption: 0.67px;
+  --text-body-sm: 14px;
+  --leading-body-sm: 1.5;
+  --tracking-body-sm: 0.35px;
+  --text-body-lg: 17px;
+  --leading-body-lg: 1.5;
+  --tracking-body-lg: -0.34px;
+  --text-subheading: 24px;
+  --leading-subheading: 1.13;
+  --tracking-subheading: -0.6px;
+  --text-heading-sm: 36px;
+  --leading-heading-sm: 1;
+  --tracking-heading-sm: -1.4px;
+  --text-heading: 43px;
+  --leading-heading: 0.9;
+  --tracking-heading: -2.19px;
+  --text-heading-lg: 52px;
+  --leading-heading-lg: 0.83;
+  --tracking-heading-lg: -3.07px;
+  --text-display: 62px;
+  --leading-display: 0.8;
+  --tracking-display: -3.97px;
+
+  /* Typography — Weights */
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+
+  /* Spacing */
+  --spacing-unit: 4px;
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-24: 24px;
+  --spacing-28: 28px;
+  --spacing-32: 32px;
+  --spacing-56: 56px;
+  --spacing-64: 64px;
+  --spacing-128: 128px;
+  --spacing-160: 160px;
+
+  /* Border Radius */
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 13.8896px;
+  --radius-full: 110px;
+  --radius-full-2: 600px;
+  --radius-full-3: 9000px;
+  --radius-full-4: 999999px;
+
+  /* Named Radii */
+  --radius-cards: 8px;
+  --radius-badges: 9999px;
+  --radius-buttons: 8px;
+  --radius-decorative: 13.89px;
+  --radius-projectimages: 8px;
+
+  /* Page */
+  --page-max-width: 1200px;
+}
+
+/* ============================================================================
+   :root — Full token set (CSS custom properties for non-Tailwind usage)
+   ============================================================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Colors */
+  --color-forest-ink: #003329;
+  --color-chartreuse-sprig: #e6ffa3;
+  --color-deep-moss: #042725;
+  --color-vivid-lime: #9bff48;
+  --color-mist-paper: #e5e7eb;
+  --color-white-sheet: #ffffff;
+  --color-graphite: #000000;
+  --color-sage-dust: #52756e;
+  --color-pine-shadow: #33544c;
+
+  /* Typography — Font Families */
+  --font-untitledsans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-boogybrutposter: var(--font-dm-serif-display), ui-serif, Georgia, serif;
+  --font-sans-serif: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Typography — Scale (named steps) */
+  --text-caption: 12px;
+  --leading-caption: 1.2;
+  --tracking-caption: 0.67px;
+  --text-body-sm: 14px;
+  --leading-body-sm: 1.5;
+  --tracking-body-sm: 0.35px;
+  --text-body-lg: 17px;
+  --leading-body-lg: 1.5;
+  --tracking-body-lg: -0.34px;
+  --text-subheading: 24px;
+  --leading-subheading: 1.13;
+  --tracking-subheading: -0.6px;
+  --text-heading-sm: 36px;
+  --leading-heading-sm: 1;
+  --tracking-heading-sm: -1.4px;
+  --text-heading: 43px;
+  --leading-heading: 0.9;
+  --tracking-heading: -2.19px;
+  --text-heading-lg: 52px;
+  --leading-heading-lg: 0.83;
+  --tracking-heading-lg: -3.07px;
+  --text-display: 62px;
+  --leading-display: 0.8;
+  --tracking-display: -3.97px;
+
+  /* Typography — Weights */
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+
+  /* Spacing */
+  --spacing-unit: 4px;
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-24: 24px;
+  --spacing-28: 28px;
+  --spacing-32: 32px;
+  --spacing-56: 56px;
+  --spacing-64: 64px;
+  --spacing-128: 128px;
+  --spacing-160: 160px;
+
+  /* Layout */
+  --page-max-width: 1200px;
+  --section-gap: 80px;
+  --card-padding: 28px;
+  --element-gap: 14px;
+
+  /* Border Radius */
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 13.8896px;
+  --radius-full: 110px;
+  --radius-full-2: 600px;
+  --radius-full-3: 9000px;
+  --radius-full-4: 999999px;
+
+  /* Named Radii */
+  --radius-cards: 8px;
+  --radius-badges: 9999px;
+  --radius-buttons: 8px;
+  --radius-decorative: 13.89px;
+  --radius-projectimages: 8px;
+
+  /* Surfaces */
+  --surface-mist-paper: #e5e7eb;
+  --surface-white-sheet: #ffffff;
+  --surface-chartreuse-sprig: #e6ffa3;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ============================================================================
+   Base
+   ============================================================================ */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-mist-paper);
+  color: var(--color-forest-ink);
+  font-family: var(--font-untitledsans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: default;
+}
+
+/* Paper grain texture overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Selection color */
+::selection {
+  background: var(--color-chartreuse-sprig);
+  color: var(--color-forest-ink);
+}
+
+/* Custom cursor for interactive elements */
+a, button, [role="button"], input, textarea, select, label {
+  cursor: pointer;
+}
+
+/* ============================================================================
+   Utility Classes — Design System
+   ============================================================================ */
+
+.eyebrow {
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-caption);
+  line-height: var(--leading-caption);
+  color: var(--color-forest-ink);
+}
+
+.display-text {
+  font-size: var(--text-display);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-display);
+}
+
+.heading-lg-text {
+  font-size: var(--text-heading-lg);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-heading-lg);
+  line-height: var(--leading-heading-lg);
+}
+
+.heading-text {
+  font-size: var(--text-heading);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-heading);
+}
+
+.heading-sm-text {
+  font-size: var(--text-heading-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-heading-sm);
+  line-height: var(--leading-heading-sm);
+}
+
+.subheading-text {
+  font-size: var(--text-subheading);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-subheading);
+  line-height: var(--leading-subheading);
+}
+
+.body-lg-text {
+  font-size: var(--text-body-lg);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-body-lg);
+  line-height: var(--leading-body-lg);
+}
+
+.body-sm-text {
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-body-sm);
+  line-height: var(--leading-body-sm);
+}
+
+.italic-accent {
+  font-family: var(--font-boogybrutposter);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ============================================================================
+   Scrollbar
+   ============================================================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-pine-shadow);
+  border-radius: 9999px;
+}
+
+/* ============================================================================
+   Animations
+   ============================================================================ */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+@keyframes slow-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes underline-hover {
+  from { transform: scaleX(0); transform-origin: left; }
+  to { transform: scaleX(1); transform-origin: left; }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 10s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+.animate-slow-spin {
+  animation: slow-spin 20s linear infinite;
+}
+
+/* Animated underline utility */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
