@@ -1,14 +1,23 @@
+"use client";
+
+import Image from "next/image";
+import { useState } from "react";
 import Reveal from "./Reveal";
+import ContactPopup from "./ContactPopup";
 
 export default function Hero() {
+  const [popupOpen, setPopupOpen] = useState(false);
+
   return (
     <section className="relative w-full min-h-screen flex flex-col">
       {/* Background image — bleeds behind text with blur */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2000&auto=format&fit=crop"
           alt=""
-          className="w-full h-full object-cover scale-110 blur-[6px] opacity-35"
+          fill
+          priority
+          className="object-cover scale-110 blur-[6px] opacity-35"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-mist-paper/60 via-mist-paper/40 to-mist-paper" />
       </div>
@@ -50,19 +59,19 @@ export default function Hero() {
 
           <Reveal type="fade-up" delay={0.75}>
             <div className="mt-8 md:mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 max-w-3xl">
-              <p className="max-w-sm text-sage-dust text-base md:text-lg leading-relaxed">
-                Кинетотерапия и лечебный массаж. Индивидуальный подход к восстановлению и здоровью вашего тела.
+              <p className="max-w-[420px] text-sage-dust text-base md:text-lg leading-relaxed">
+                Индивидуальная физическая реабилитация для взрослых, спортсменов и людей после травм, операций и неврологических заболеваний.
               </p>
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 text-forest-ink text-[15px] md:text-[16px] font-medium border-b border-forest-ink pb-1 hover:gap-4 transition-all duration-300"
+              <button
+                onClick={() => setPopupOpen(true)}
+                className="inline-flex items-center gap-2 text-forest-ink text-[15px] md:text-[16px] font-medium border-b border-forest-ink pb-1 hover:gap-4 transition-all duration-300 whitespace-nowrap"
               >
-                Записаться на приём
+                Записаться на консультацию
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12" />
                   <polyline points="12 5 19 12 12 19" />
                 </svg>
-              </a>
+              </button>
             </div>
           </Reveal>
         </div>
@@ -71,11 +80,11 @@ export default function Hero() {
         <Reveal type="fade-up" delay={0.85}>
           <div className="w-full flex items-center justify-between border-t border-forest-ink/10 pt-5 md:pt-6">
             <div className="flex items-center gap-6 md:gap-10">
-              <span className="text-pine-shadow text-[12px] md:text-[13px]">© Корни, 2026</span>
+              <span className="text-pine-shadow text-[12px] md:text-[13px]">© Kineto One, 2026</span>
               <span className="hidden md:inline text-pine-shadow text-[12px] md:text-[13px]">8 лет практики</span>
             </div>
             <a
-              href="#work"
+              href="/#work"
               className="text-pine-shadow text-[12px] md:text-[13px] flex items-center gap-2 hover:text-forest-ink transition-colors"
             >
               Смотреть практику
@@ -87,6 +96,12 @@ export default function Hero() {
           </div>
         </Reveal>
       </div>
+
+      <ContactPopup 
+        isOpen={popupOpen} 
+        onClose={() => setPopupOpen(false)} 
+        showPhone={true}
+      />
     </section>
   );
 }

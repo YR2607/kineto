@@ -16,7 +16,7 @@ const dmSerifDisplay = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Корни — кинетотерапия и массаж",
+  title: "Kineto One — кинетотерапия и массаж",
   description:
     "Кинетотерапия и лечебный массаж. Индивидуальный подход к вашему телу — восстановление, расслабление, здоровье.",
 };
