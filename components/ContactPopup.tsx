@@ -42,7 +42,7 @@ export default function ContactPopup({ isOpen, onClose, title = "Связать�
 
       {/* Modal */}
       <div
-        className={`fixed top-1/2 left-1/2 -translate-x-1/2 z-[101] w-[90%] max-w-[400px] bg-white-sheet rounded-[24px] p-8 shadow-[0_20px_60px_rgba(0,51,41,0.1)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`fixed top-1/2 left-1/2 -translate-x-1/2 z-[101] w-[92%] max-w-[400px] max-h-[90vh] overflow-y-auto bg-white-sheet rounded-[24px] p-6 md:p-8 shadow-[0_20px_60px_rgba(0,51,41,0.1)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           isOpen ? "-translate-y-1/2 opacity-100 scale-100" : "-translate-y-[40%] opacity-0 scale-95 pointer-events-none"
         }`}
       >
@@ -56,8 +56,8 @@ export default function ContactPopup({ isOpen, onClose, title = "Связать�
           </svg>
         </button>
 
-        <h3 className="text-[22px] font-semibold text-forest-ink mb-2 pr-8">{title}</h3>
-        <p className="text-[15px] text-sage-dust mb-8">Выберите удобный для вас способ связи. Мы ответим в ближайшее время.</p>
+        <h3 className="text-[20px] md:text-[22px] font-semibold text-forest-ink mb-2 pr-8">{title}</h3>
+        <p className="text-[14px] md:text-[15px] text-sage-dust mb-6 md:mb-8">Выберите удобный для вас способ связи. Мы ответим в ближайшее время.</p>
 
         <div className="flex flex-col gap-3">
           {showPhone && (

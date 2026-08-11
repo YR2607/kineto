@@ -129,19 +129,31 @@ export default function Navbar() {
             ))}
           </div>
 
-          <button
-            onClick={() => {
-              setMobileOpen(false);
-              setTimeout(() => setPopupOpen(true), 300);
-            }}
-            className="inline-flex items-center justify-between text-forest-ink text-[18px] font-medium bg-chartreuse-sprig/50 px-5 py-4 rounded-2xl"
-          >
-            Записаться на приём
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </button>
+          <div className="flex flex-col gap-4">
+            <button
+              onClick={() => {
+                setMobileOpen(false);
+                setTimeout(() => setPopupOpen(true), 300);
+              }}
+              className="text-left text-sage-dust text-[16px] font-medium hover:text-forest-ink transition-colors"
+            >
+              📞 0697 15 536
+            </button>
+
+            <button
+              onClick={() => {
+                setMobileOpen(false);
+                setTimeout(() => setPopupOpen(true), 300);
+              }}
+              className="inline-flex items-center justify-between text-forest-ink text-[18px] font-medium bg-chartreuse-sprig/50 px-5 py-4 rounded-2xl"
+            >
+              Записаться на приём
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 

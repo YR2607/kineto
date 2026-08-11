@@ -35,12 +35,12 @@ export default async function ServicePage({
             </span>
           </Reveal>
           <Reveal type="fade-up" delay={0.2}>
-            <h1 className="text-forest-ink text-[40px] md:text-[6vw] font-semibold leading-[0.95] tracking-tight max-w-[1000px] mb-8">
+            <h1 className="text-forest-ink text-[32px] md:text-[6vw] font-semibold leading-[0.95] tracking-tight max-w-[1000px] mb-8">
               {service.title}
             </h1>
           </Reveal>
           <Reveal type="fade-up" delay={0.3}>
-            <p className="text-sage-dust text-[18px] md:text-[22px] max-w-[800px] leading-relaxed">
+            <p className="text-sage-dust text-[16px] md:text-[22px] max-w-[800px] leading-relaxed">
               {service.subtitle}
             </p>
           </Reveal>
@@ -62,11 +62,11 @@ export default async function ServicePage({
         </section>
 
         {/* Article Content */}
-        <section className="w-full px-6 md:px-16 lg:px-24 py-20 md:py-32">
+        <section className="w-full px-6 md:px-16 lg:px-24 py-16 md:py-32">
           <div className="mx-auto max-w-[800px]">
             <Reveal type="fade-up" delay={0.1}>
               <div 
-                className="prose prose-lg md:prose-xl prose-p:text-sage-dust prose-headings:text-forest-ink prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-forest-ink prose-a:underline-offset-4 hover:prose-a:text-sage-dust prose-li:text-sage-dust max-w-none prose-h2:mt-16 prose-h2:mb-8 prose-h3:mt-10 prose-h3:mb-6 prose-strong:text-forest-ink prose-strong:font-semibold prose-ul:my-8 prose-li:my-2 prose-ul:marker:text-chartreuse-sprig"
+                className="prose prose-base md:prose-lg prose-p:text-sage-dust prose-headings:text-forest-ink prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-forest-ink prose-a:underline-offset-4 hover:prose-a:text-sage-dust prose-li:text-sage-dust max-w-none prose-h2:mt-12 md:prose-h2:mt-16 prose-h2:mb-6 md:prose-h2:mb-8 prose-h3:mt-8 md:prose-h3:mt-10 prose-h3:mb-4 md:prose-h3:mb-6 prose-strong:text-forest-ink prose-strong:font-semibold prose-ul:my-6 md:prose-ul:my-8 prose-li:my-2 prose-ul:marker:text-chartreuse-sprig"
                 dangerouslySetInnerHTML={{ __html: service.content }}
               />
             </Reveal>
