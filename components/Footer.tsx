@@ -1,129 +1,97 @@
-"use client";
-
-import { useRef } from "react";
-import AnimatedLink from "./AnimatedLink";
-import Reveal from "./Reveal";
-
-function MagneticButton({
-  onClick,
-  children,
-}: {
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  const ref = useRef<HTMLButtonElement>(null);
-
-  const handleMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const el = ref.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    el.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-  };
-
-  const handleLeave = () => {
-    const el = ref.current;
-    if (!el) return;
-    el.style.transform = "translate(0, 0)";
-  };
-
-  return (
-    <button
-      ref={ref}
-      onClick={onClick}
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
-      className="group inline-flex items-center gap-4 md:gap-6 text-forest-ink transition-transform duration-300 ease-out will-change-transform"
-    >
-      <span className="bg-chartreuse-sprig text-forest-ink w-[72px] h-[72px] md:w-[120px] md:h-[120px] rounded-full flex items-center justify-center shrink-0 transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-12">
-        <svg
-          width="28"
-          height="28"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="md:w-[48px] md:h-[48px] transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1"
-        >
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-          <polyline points="12 5 19 12 12 19"></polyline>
-        </svg>
-      </span>
-      <span className="text-[16vw] md:text-[8vw] font-semibold leading-[0.85] tracking-tight group-hover:text-sage-dust transition-colors duration-300">
-        {children}
-      </span>
-    </button>
-  );
-}
-
-import { useState } from "react";
-import ContactPopup from "./ContactPopup";
+import Link from "next/link";
+import { siteConfig } from "@/config/site";
+import ContactTrigger from "./contact/ContactTrigger";
 
 export default function Footer() {
-  const [popupOpen, setPopupOpen] = useState(false);
-
   return (
-    <footer id="contact" className="w-full bg-mist-paper py-24 md:py-40 px-6 md:px-16 lg:px-24">
-      <div className="w-full flex flex-col md:flex-row justify-between items-start gap-20 md:gap-12">
-        <Reveal type="fade-up" className="w-full md:w-auto">
-          <MagneticButton onClick={() => setPopupOpen(true)}>
-            Написать
-          </MagneticButton>
-        </Reveal>
-
-        <Reveal type="fade-up" delay={0.2} className="w-full md:w-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-3 md:flex md:flex-col gap-12 md:min-w-[340px]">
-            <div className="flex flex-col gap-3 border-b border-forest-ink/10 pb-6">
-              <span className="text-[14px] uppercase tracking-widest font-semibold text-forest-ink">Контакты</span>
-              <AnimatedLink href="tel:+37369715536" className="text-[20px] text-sage-dust hover:text-forest-ink transition-colors">0697 15 536</AnimatedLink>
-              <div className="flex gap-4 mt-2">
-                <a href="https://t.me/+37369715536" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#229ED9]/10 text-[#229ED9] hover:bg-[#229ED9] hover:text-white-sheet flex items-center justify-center transition-colors duration-300" aria-label="Telegram">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21.5 2L2 10.5L9.5 13.5L14 21.5L21.5 2Z" />
-                    <path d="M9.5 13.5L14 9" />
-                  </svg>
-                </a>
-                <a href="https://wa.me/37369715536" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white-sheet flex items-center justify-center transition-colors duration-300" aria-label="WhatsApp">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-                  </svg>
-                </a>
-                <a href="viber://chat?number=%2B37369715536" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-[#7360F2]/10 text-[#7360F2] hover:bg-[#7360F2] hover:text-white-sheet flex items-center justify-center transition-colors duration-300" aria-label="Viber">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                  </svg>
-                </a>
+    <footer id="contact" className="bg-mist-paper py-20 md:py-32">
+      <div className="mx-auto max-w-[1200px] px-6 md:px-16">
+        <div className="flex flex-col gap-12 md:flex-row md:justify-between">
+          <div className="flex flex-col gap-6">
+            <h2 className="text-3xl font-semibold leading-tight tracking-tight text-forest-ink md:text-5xl">
+              Готовы начать?
+            </h2>
+            <p className="max-w-[480px] text-lg leading-relaxed text-sage-dust">
+              Выберите удобный канал связи — специалист ответит на вопросы и
+              поможет определить подходящее направление.
+            </p>
+            <ContactTrigger className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-chartreuse-sprig px-8 text-base font-semibold text-white-sheet shadow-sm transition-all duration-200 hover:bg-vivid-lime hover:shadow-md active:scale-[0.98] sm:w-auto sm:min-w-[200px]">
+              Связаться
+            </ContactTrigger>
+          </div>
+          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:gap-12">
+            <div className="flex flex-col gap-3">
+              <span className="text-sm font-medium uppercase tracking-widest text-forest-ink">
+                Телефон
+              </span>
+              <Link
+                href={`tel:${siteConfig.phoneInternational}`}
+                className="text-lg font-medium text-forest-ink underline-offset-4 transition-colors hover:text-sage-dust hover:underline"
+              >
+                {siteConfig.phoneDisplay}
+              </Link>
+            </div>
+            <div className="flex flex-col gap-3">
+              <span className="text-sm font-medium uppercase tracking-widest text-forest-ink">
+                Адрес
+              </span>
+              <span className="text-lg leading-relaxed text-sage-dust">
+                {siteConfig.address.street}
+                <br />
+                {siteConfig.address.city}, Moldova
+              </span>
+            </div>
+            <div className="flex flex-col gap-3">
+              <span className="text-sm font-medium uppercase tracking-widest text-forest-ink">
+                Каналы связи
+              </span>
+              <div className="flex flex-col gap-2">
+                <Link
+                  href={siteConfig.channels.telegram}
+                  className="text-lg text-sage-dust underline-offset-4 transition-colors hover:text-forest-ink hover:underline"
+                >
+                  Telegram
+                </Link>
+                <Link
+                  href={siteConfig.channels.whatsapp}
+                  className="text-lg text-sage-dust underline-offset-4 transition-colors hover:text-forest-ink hover:underline"
+                >
+                  WhatsApp
+                </Link>
+                <Link
+                  href={siteConfig.channels.viber}
+                  className="text-lg text-sage-dust underline-offset-4 transition-colors hover:text-forest-ink hover:underline"
+                >
+                  Viber
+                </Link>
               </div>
             </div>
-
-            <div className="flex flex-col gap-3 border-b border-forest-ink/10 pb-6">
-              <span className="text-[14px] uppercase tracking-widest font-semibold text-forest-ink">Студия</span>
-              <span className="text-[20px] text-sage-dust leading-relaxed">str. I. Creangă 1/2<br/>Chișinău, Moldova</span>
-            </div>
-
             <div className="flex flex-col gap-3">
-              <span className="text-[14px] uppercase tracking-widest font-semibold text-forest-ink">Соцсети</span>
-              <div className="flex flex-col sm:flex-row md:flex-col gap-1 sm:gap-4 md:gap-1">
-                <AnimatedLink href="https://www.instagram.com/kineto_one/" external className="text-[20px] text-sage-dust hover:text-forest-ink transition-colors">Instagram</AnimatedLink>
-                <AnimatedLink href="https://www.facebook.com/profile.php?id=61574692887644" external className="text-[20px] text-sage-dust hover:text-forest-ink transition-colors">Facebook</AnimatedLink>
+              <span className="text-sm font-medium uppercase tracking-widest text-forest-ink">
+                Соцсети
+              </span>
+              <div className="flex flex-col gap-2">
+                <Link
+                  href={siteConfig.channels.instagram}
+                  className="text-lg text-sage-dust underline-offset-4 transition-colors hover:text-forest-ink hover:underline"
+                >
+                  Instagram
+                </Link>
+                <Link
+                  href={siteConfig.channels.facebook}
+                  className="text-lg text-sage-dust underline-offset-4 transition-colors hover:text-forest-ink hover:underline"
+                >
+                  Facebook
+                </Link>
               </div>
             </div>
           </div>
-        </Reveal>
+        </div>
+        <div className="mt-16 flex flex-col gap-4 border-t border-forest-ink/10 pt-8 text-sm text-pine-shadow md:flex-row md:justify-between">
+          <span>© 2026 {siteConfig.name}.</span>
+          <span>Студия физической реабилитации, Кишинёв</span>
+        </div>
       </div>
-
-      <div className="w-full mt-32 pt-8 border-t border-forest-ink/10 flex flex-col md:flex-row justify-between gap-4 text-[14px] text-pine-shadow">
-        <span>© 2026 Kineto One.</span>
-        <span>Сделано с заботой о теле</span>
-      </div>
-
-      <ContactPopup 
-        isOpen={popupOpen} 
-        onClose={() => setPopupOpen(false)} 
-      />
     </footer>
   );
 }

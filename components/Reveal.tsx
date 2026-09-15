@@ -1,6 +1,7 @@
 "use client";
 
-import { createElement, ElementType, useEffect, useRef, useState } from "react";
+import { createElement, ElementType, useMemo } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
 type AnimationType =
   | "fade-up"
@@ -18,6 +19,13 @@ interface RevealProps {
   threshold?: number;
 }
 
+const springTransition = {
+  type: "spring" as const,
+  stiffness: 100,
+  damping: 20,
+  mass: 0.8,
+};
+
 export default function Reveal({
   children,
   type = "fade-up",
@@ -26,63 +34,37 @@ export default function Reveal({
   as = "div",
   threshold = 0.05,
 }: RevealProps) {
-  const ref = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      {
-        threshold,
-        rootMargin: "0px 0px -10px 0px",
-      }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, [threshold]);
+  const prefersReducedMotion = useReducedMotion();
 
   const isMaskReveal = type === "mask-reveal";
 
-  const baseStyle: React.CSSProperties = isMaskReveal
-    ? {
-        clipPath: visible
-          ? "inset(0 0 0 0)"
-          : "inset(100% 0 0 0)",
-        transition: `clip-path 1s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`,
-        willChange: "clip-path",
-      }
+  const initial = isMaskReveal
+    ? { clipPath: "inset(100% 0 0 0)" }
     : {
-        opacity: visible ? 1 : 0,
-        transform: visible
-          ? "translate(0, 0)"
-          : type === "fade-up"
-            ? "translateY(20px)"
-            : type === "slide-left"
-              ? "translateX(-40px)"
-              : type === "slide-right"
-                ? "translateX(40px)"
-                : "none",
-        transition: `opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`,
-        willChange: "opacity, transform",
+        opacity: 1,
+        y: type === "fade-up" ? 24 : 0,
+        x:
+          type === "slide-left"
+            ? -40
+            : type === "slide-right"
+              ? 40
+              : 0,
       };
 
-  const Tag = as;
+  const animate = isMaskReveal
+    ? { clipPath: "inset(0% 0% 0% 0%)" }
+    : { opacity: 1, y: 0, x: 0 };
+
+  const MotionTag = useMemo(() => motion.create(as as ElementType), [as]);
 
   return createElement(
-    Tag,
+    MotionTag,
     {
-      ref: ref as React.RefObject<HTMLElement>,
-      style: baseStyle,
-      className: className,
+      className,
+      initial: prefersReducedMotion ? false : initial,
+      whileInView: prefersReducedMotion ? undefined : animate,
+      viewport: { once: true, margin: `0px 0px -10% 0px`, amount: threshold },
+      transition: { ...springTransition, delay },
     },
     children
   );

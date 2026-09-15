@@ -1,81 +1,123 @@
-import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Image from "next/image";
-import { getServiceBySlug, getAllServiceSlugs } from "@/data/services";
-import Navbar from "@/components/Navbar";
+import { notFound } from "next/navigation";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import Footer from "@/components/Footer";
-import Reveal from "@/components/Reveal";
-import Process from "@/components/Process";
+import JsonLd from "@/components/JsonLd";
+import Navbar from "@/components/Navbar";
+import RelatedServices from "@/components/RelatedServices";
+import ServiceArticle from "@/components/ServiceArticle";
+import ContactTrigger from "@/components/contact/ContactTrigger";
+import { getSiteUrl, siteConfig } from "@/config/site";
+import { getAllServiceSlugs, getServiceBySlug } from "@/data/services";
+import { buildServiceMetadata } from "@/lib/metadata";
 
-export async function generateStaticParams() {
-  const slugs = getAllServiceSlugs();
-  return slugs.map((slug) => ({ slug }));
+type ServicePageProps = {
+  params: Promise<{ slug: string }>;
+};
+
+export function generateStaticParams() {
+  return getAllServiceSlugs().map((slug) => ({ slug }));
 }
 
-export default async function ServicePage({
+export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const resolvedParams = await params;
-  const service = getServiceBySlug(resolvedParams.slug);
+}: ServicePageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const service = getServiceBySlug(slug);
+  if (!service) notFound();
+  return buildServiceMetadata(service);
+}
 
-  if (!service) {
-    notFound();
-  }
+export default async function ServicePage({ params }: ServicePageProps) {
+  const { slug } = await params;
+  const service = getServiceBySlug(slug);
+  if (!service) notFound();
+
+  const siteUrl = getSiteUrl();
+  const serviceUrl = siteUrl
+    ? new URL(`/services/${service.slug}`, siteUrl).toString()
+    : undefined;
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.title,
+    description: service.metaDescription,
+    ...(serviceUrl ? { url: serviceUrl } : {}),
+    provider: { "@type": "Organization", name: siteConfig.name },
+    areaServed: { "@type": "City", name: "Chișinău" },
+  };
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Главная",
+        ...(siteUrl ? { item: siteUrl.toString() } : {}),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: service.title,
+        ...(serviceUrl ? { item: serviceUrl } : {}),
+      },
+    ],
+  };
 
   return (
     <>
+      <JsonLd data={[serviceSchema, breadcrumbSchema]} />
       <Navbar />
-      <main className="flex flex-col flex-1 bg-white-sheet pt-24 md:pt-32">
-        {/* Service Hero */}
-        <section className="relative w-full px-6 md:px-16 lg:px-24 py-12 md:py-20 flex flex-col items-center text-center">
-          <Reveal type="fade-up" delay={0.1}>
-            <span className="inline-block py-1 px-3 rounded-full bg-chartreuse-sprig/50 text-forest-ink text-[12px] md:text-[14px] font-medium tracking-wide uppercase mb-6">
-              Направление
-            </span>
-          </Reveal>
-          <Reveal type="fade-up" delay={0.2}>
-            <h1 className="text-forest-ink text-[32px] md:text-[6vw] font-semibold leading-[0.95] tracking-tight max-w-[1000px] mb-8">
-              {service.title}
-            </h1>
-          </Reveal>
-          <Reveal type="fade-up" delay={0.3}>
-            <p className="text-sage-dust text-[16px] md:text-[22px] max-w-[800px] leading-relaxed">
-              {service.subtitle}
-            </p>
-          </Reveal>
-        </section>
-
-        {/* Featured Image */}
-        <section className="px-6 md:px-16 lg:px-24 w-full">
-          <Reveal type="fade-up" delay={0.4}>
-            <div className="relative w-full h-[40vh] md:h-[60vh] rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,51,41,0.08)]">
+      <main id="main-content" className="flex flex-1 flex-col bg-white-sheet">
+        <div className="mx-auto max-w-[1200px] w-full px-6 pt-8 md:px-16">
+          <Breadcrumbs title={service.title} />
+        </div>
+        <section className="mx-auto max-w-[1200px] w-full px-6 py-12 md:px-16 md:py-20">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+            <div>
+              <p className="text-sm font-medium uppercase tracking-widest text-sage-dust">
+                {service.category}
+              </p>
+              <h1 className="mt-5 text-[32px] font-semibold leading-tight tracking-tight text-forest-ink md:text-[48px]">
+                {service.title}
+              </h1>
+              <p className="mt-6 max-w-[560px] text-lg leading-relaxed text-sage-dust">
+                {service.subtitle}
+              </p>
+              <ContactTrigger className="mt-8 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-chartreuse-sprig px-8 text-base font-semibold text-white-sheet shadow-sm transition-all duration-200 hover:bg-vivid-lime hover:shadow-md active:scale-[0.98] sm:w-auto sm:min-w-[200px]">
+                Связаться
+              </ContactTrigger>
+            </div>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-mist-paper">
               <Image
                 src={service.heroImage}
-                alt={service.title}
+                alt={service.heroAlt}
                 fill
-                className="object-cover"
+                sizes="(max-width: 1023px) 100vw, 50vw"
                 priority
+                className="object-cover"
               />
             </div>
-          </Reveal>
-        </section>
-
-        {/* Article Content */}
-        <section className="w-full px-6 md:px-16 lg:px-24 py-16 md:py-32">
-          <div className="mx-auto max-w-[800px]">
-            <Reveal type="fade-up" delay={0.1}>
-              <div 
-                className="prose prose-base md:prose-lg prose-p:text-sage-dust prose-headings:text-forest-ink prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-forest-ink prose-a:underline-offset-4 hover:prose-a:text-sage-dust prose-li:text-sage-dust max-w-none prose-h2:mt-12 md:prose-h2:mt-16 prose-h2:mb-6 md:prose-h2:mb-8 prose-h3:mt-8 md:prose-h3:mt-10 prose-h3:mb-4 md:prose-h3:mb-6 prose-strong:text-forest-ink prose-strong:font-semibold prose-ul:my-6 md:prose-ul:my-8 prose-li:my-2 prose-ul:marker:text-chartreuse-sprig"
-                dangerouslySetInnerHTML={{ __html: service.content }}
-              />
-            </Reveal>
           </div>
         </section>
-
-        {/* Include Process section to add value and call-to-action */}
-        <Process />
-
+        <section className="mx-auto max-w-[1200px] w-full px-6 py-16 md:px-16 md:py-24">
+          <ServiceArticle sections={service.sections} />
+        </section>
+        <RelatedServices slugs={service.relatedSlugs} />
+        <section className="bg-mist-paper py-16 md:py-24">
+          <div className="mx-auto max-w-[1200px] px-6 md:px-16">
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              <h2 className="max-w-[600px] text-2xl font-semibold leading-tight tracking-tight text-forest-ink md:text-3xl">
+                Хотите уточнить подходящее направление?
+              </h2>
+              <ContactTrigger className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-chartreuse-sprig px-8 text-base font-semibold text-white-sheet shadow-sm transition-all duration-200 hover:bg-vivid-lime hover:shadow-md active:scale-[0.98] sm:w-auto sm:min-w-[200px]">
+                Связаться
+              </ContactTrigger>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>

@@ -1,37 +1,59 @@
 import type { Metadata } from "next";
-import { Inter, DM_Serif_Display } from "next/font/google";
+import { Source_Sans_3 } from "next/font/google";
+import JsonLd from "@/components/JsonLd";
+import { ContactDialogProvider } from "@/components/contact/ContactDialogProvider";
+import { getSiteUrl, siteConfig } from "@/config/site";
+import { buildRootMetadata } from "@/lib/metadata";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+const sourceSans3 = Source_Sans_3({
+  variable: "--font-source-sans-3",
+  subsets: ["latin", "latin-ext"],
   weight: ["400", "600"],
+  style: ["normal", "italic"],
 });
 
-const dmSerifDisplay = DM_Serif_Display({
-  variable: "--font-dm-serif-display",
-  subsets: ["latin"],
-  weight: ["400"],
-  style: ["italic"],
-});
-
-export const metadata: Metadata = {
-  title: "Kineto One — кинетотерапия и массаж",
-  description:
-    "Кинетотерапия и лечебный массаж. Индивидуальный подход к вашему телу — восстановление, расслабление, здоровье.",
-};
+export const metadata: Metadata = buildRootMetadata();
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteUrl = getSiteUrl();
+
   return (
     <html
       lang="ru"
-      className={`${inter.variable} ${dmSerifDisplay.variable} h-full antialiased`}
+      className={`${sourceSans3.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <a href="#main-content" className="skip-link">
+          Перейти к основному содержанию
+        </a>
+        <ContactDialogProvider>
+          <JsonLd
+            data={{
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: siteConfig.name,
+              ...(siteUrl ? { url: siteUrl.toString() } : {}),
+              telephone: siteConfig.phoneInternational,
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: siteConfig.address.street,
+                addressLocality: siteConfig.address.city,
+                addressCountry: siteConfig.address.country,
+              },
+              sameAs: [
+                siteConfig.channels.instagram,
+                siteConfig.channels.facebook,
+              ],
+            }}
+          />
+          {children}
+        </ContactDialogProvider>
+      </body>
     </html>
   );
 }

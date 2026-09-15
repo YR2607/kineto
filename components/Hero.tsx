@@ -1,107 +1,47 @@
-"use client";
-
 import Image from "next/image";
-import { useState } from "react";
-import Reveal from "./Reveal";
-import ContactPopup from "./ContactPopup";
+import Link from "next/link";
+import ContactTrigger from "./contact/ContactTrigger";
 
 export default function Hero() {
-  const [popupOpen, setPopupOpen] = useState(false);
-
   return (
-    <section className="relative w-full min-h-screen flex flex-col">
-      {/* Background image — bleeds behind text with blur */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+    <section className="relative w-full overflow-hidden bg-mist-paper">
+      <div className="relative z-10 mx-auto flex min-h-[88svh] max-w-[1200px] flex-col justify-center px-6 py-24 md:px-16 md:py-32">
+        <p className="text-sm font-medium uppercase tracking-widest text-sage-dust">
+          Студия физической реабилитации — Кишинёв
+        </p>
+        <h1 className="mt-6 max-w-[900px] text-[40px] font-semibold leading-[1.02] tracking-tight text-forest-ink md:text-[68px] lg:text-[76px]">
+          Помогаем телу{" "}
+          <span className="italic-accent">двигаться свободно</span>
+          <br />
+          и без лишней боли
+        </h1>
+        <p className="mt-7 max-w-[560px] text-lg leading-relaxed text-sage-dust md:text-xl">
+          Индивидуальная физическая реабилитация для взрослых, спортсменов и
+          людей после травм, операций и неврологических состояний.
+        </p>
+        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <ContactTrigger className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-chartreuse-sprig px-8 text-base font-semibold text-white-sheet shadow-sm transition-all duration-200 hover:bg-vivid-lime hover:shadow-md active:scale-[0.98] sm:w-auto sm:min-w-[200px]">
+            Связаться
+          </ContactTrigger>
+          <Link
+            href="/#services"
+            className="inline-flex min-h-12 w-full items-center justify-center rounded-full border-2 border-forest-ink/20 px-8 text-base font-medium text-forest-ink transition-all duration-200 hover:border-chartreuse-sprig hover:text-chartreuse-sprig active:scale-[0.98] sm:w-auto sm:min-w-[200px]"
+          >
+            Смотреть направления
+          </Link>
+        </div>
+      </div>
+      <div className="relative aspect-[4/3] w-full md:absolute md:inset-0 md:z-0 md:aspect-auto">
         <Image
-          src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2000&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2000&auto=format&fit=crop"
           alt=""
           fill
           priority
-          className="object-cover scale-110 blur-[6px] opacity-35"
+          sizes="100vw"
+          className="object-cover opacity-25 md:opacity-20"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-mist-paper/60 via-mist-paper/40 to-mist-paper" />
+        <div className="absolute inset-0 bg-gradient-to-b from-mist-paper via-mist-paper/70 to-mist-paper" />
       </div>
-
-      {/* Content */}
-      <div className="relative z-10 flex flex-col flex-1 px-6 md:px-16 lg:px-24 pt-32 md:pt-36 pb-6 md:pb-8">
-        {/* Top bar */}
-        <div className="w-full flex items-center justify-between">
-          <Reveal type="fade-up" delay={0.05}>
-            <p className="text-[13px] md:text-[14px] text-sage-dust tracking-wide">
-              Кинетотерапия — Кишинёв
-            </p>
-          </Reveal>
-          <Reveal type="fade-up" delay={0.1}>
-            <span className="inline-flex items-center gap-2 text-[12px] md:text-[13px] text-forest-ink bg-chartreuse-sprig/50 px-3 py-1.5 rounded-full">
-              <span className="w-1.5 h-1.5 rounded-full bg-forest-ink animate-pulse" />
-              Запись открыта
-            </span>
-          </Reveal>
-        </div>
-
-        {/* Main content */}
-        <div className="w-full flex-1 flex flex-col justify-center py-6 md:py-10">
-          <h1 className="text-forest-ink text-[14vw] md:text-[6.5vw] lg:text-[5.5vw] font-semibold leading-[0.9] tracking-[-0.05em]">
-            <Reveal type="fade-up" delay={0.15} as="span" className="block">
-              Тело, которое
-            </Reveal>
-            <Reveal type="fade-up" delay={0.3} as="span" className="block">
-              <span className="italic-accent text-forest-ink">дышит</span>{" "}
-              <span className="text-sage-dust">свободно</span>
-            </Reveal>
-            <Reveal type="fade-up" delay={0.45} as="span" className="block">
-              и движется
-            </Reveal>
-            <Reveal type="fade-up" delay={0.6} as="span" className="block">
-              без боли.
-            </Reveal>
-          </h1>
-
-          <Reveal type="fade-up" delay={0.75}>
-            <div className="mt-8 md:mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 max-w-3xl">
-              <p className="max-w-[420px] text-sage-dust text-base md:text-lg leading-relaxed">
-                Индивидуальная физическая реабилитация для взрослых, спортсменов и людей после травм, операций и неврологических заболеваний.
-              </p>
-              <button
-                onClick={() => setPopupOpen(true)}
-                className="inline-flex items-center gap-2 text-forest-ink text-[15px] md:text-[16px] font-medium border-b border-forest-ink pb-1 hover:gap-4 transition-all duration-300 whitespace-nowrap"
-              >
-                Записаться на консультацию
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
-              </button>
-            </div>
-          </Reveal>
-        </div>
-
-        {/* Bottom bar */}
-        <Reveal type="fade-up" delay={0.85}>
-          <div className="w-full flex items-center justify-between border-t border-forest-ink/10 pt-5 md:pt-6">
-            <div className="flex items-center gap-6 md:gap-10">
-              <span className="text-pine-shadow text-[12px] md:text-[13px]">© Kineto One, 2026</span>
-              <span className="hidden md:inline text-pine-shadow text-[12px] md:text-[13px]">8 лет практики</span>
-            </div>
-            <a
-              href="/#work"
-              className="text-pine-shadow text-[12px] md:text-[13px] flex items-center gap-2 hover:text-forest-ink transition-colors"
-            >
-              Смотреть практику
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <polyline points="19 12 12 19 5 12" />
-              </svg>
-            </a>
-          </div>
-        </Reveal>
-      </div>
-
-      <ContactPopup 
-        isOpen={popupOpen} 
-        onClose={() => setPopupOpen(false)} 
-        showPhone={true}
-      />
     </section>
   );
 }

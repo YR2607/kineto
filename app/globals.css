@@ -2,27 +2,27 @@
 @plugin "@tailwindcss/typography";
 
 /* ============================================================================
-   Hey Low — Design System Tokens
-   botanical field journal on cream paper
+   Kineto One — Living Forest Design System
+   Human Botanical / Trust-first / Living Forest
    ============================================================================ */
 
 @theme {
-  /* Colors */
-  --color-forest-ink: #003329;
-  --color-chartreuse-sprig: #e6ffa3;
-  --color-deep-moss: #042725;
-  --color-vivid-lime: #9bff48;
-  --color-mist-paper: #e5e7eb;
-  --color-white-sheet: #ffffff;
+  /* Colors — Med+Warm Care */
+  --color-forest-ink: #2a3434;
+  --color-chartreuse-sprig: #2e7d7a;
+  --color-deep-moss: #1a2424;
+  --color-vivid-lime: #3a9d9a;
+  --color-mist-paper: #f7f4ef;
+  --color-white-sheet: #fdfbf7;
   --color-graphite: #000000;
-  --color-sage-dust: #52756e;
-  --color-pine-shadow: #33544c;
+  --color-sage-dust: #5c6a6a;
+  --color-pine-shadow: #3d4a4a;
 
   /* Typography — Font Families
-     Substitute: Inter for UntitledSans, DM Serif Display Italic for BoogyBrutPoster */
-  --font-untitledsans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-boogybrutposter: var(--font-dm-serif-display), ui-serif, Georgia, serif;
-  --font-sans-serif: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+     Source Sans 3 for both regular and italic display emphasis */
+  --font-untitledsans: var(--font-source-sans-3), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-boogybrutposter: var(--font-source-sans-3), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans-serif: var(--font-source-sans-3), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* Typography — Scale (named steps) */
   --text-caption: 12px;
@@ -79,7 +79,7 @@
   /* Named Radii */
   --radius-cards: 8px;
   --radius-badges: 9999px;
-  --radius-buttons: 8px;
+  --radius-buttons: 999px;
   --radius-decorative: 13.89px;
   --radius-projectimages: 8px;
 
@@ -92,21 +92,21 @@
    ============================================================================ */
 
 :root {
-  /* Colors */
-  --color-forest-ink: #003329;
-  --color-chartreuse-sprig: #e6ffa3;
-  --color-deep-moss: #042725;
-  --color-vivid-lime: #9bff48;
-  --color-mist-paper: #e5e7eb;
-  --color-white-sheet: #ffffff;
+  /* Colors — Med+Warm Care */
+  --color-forest-ink: #2a3434;
+  --color-chartreuse-sprig: #2e7d7a;
+  --color-deep-moss: #1a2424;
+  --color-vivid-lime: #3a9d9a;
+  --color-mist-paper: #f7f4ef;
+  --color-white-sheet: #fdfbf7;
   --color-graphite: #000000;
-  --color-sage-dust: #52756e;
-  --color-pine-shadow: #33544c;
+  --color-sage-dust: #5c6a6a;
+  --color-pine-shadow: #3d4a4a;
 
   /* Typography — Font Families */
-  --font-untitledsans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-boogybrutposter: var(--font-dm-serif-display), ui-serif, Georgia, serif;
-  --font-sans-serif: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-untitledsans: var(--font-source-sans-3), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-boogybrutposter: var(--font-source-sans-3), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans-serif: var(--font-source-sans-3), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* Typography — Scale (named steps) */
   --text-caption: 12px;
@@ -169,14 +169,14 @@
   /* Named Radii */
   --radius-cards: 8px;
   --radius-badges: 9999px;
-  --radius-buttons: 8px;
+  --radius-buttons: 999px;
   --radius-decorative: 13.89px;
   --radius-projectimages: 8px;
 
   /* Surfaces */
-  --surface-mist-paper: #e5e7eb;
-  --surface-white-sheet: #ffffff;
-  --surface-chartreuse-sprig: #e6ffa3;
+  --surface-mist-paper: #f7f4ef;
+  --surface-white-sheet: #fdfbf7;
+  --surface-chartreuse-sprig: #2e7d7a;
 }
 
 /* ============================================================================
@@ -214,7 +214,7 @@ body::before {
 /* Selection color */
 ::selection {
   background: var(--color-chartreuse-sprig);
-  color: var(--color-forest-ink);
+  color: var(--color-white-sheet);
 }
 
 /* Custom cursor for interactive elements */
@@ -366,4 +366,397 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+.skip-link {
+  position: fixed;
+  inset-block-start: 0.75rem;
+  inset-inline-start: 0.75rem;
+  z-index: 200;
+  transform: translateY(-200%);
+  border-radius: 999px;
+  background: var(--color-forest-ink);
+  color: var(--color-white-sheet);
+  padding: 0.75rem 1rem;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--color-forest-ink);
+  outline-offset: 3px;
+}
+
+.contact-dialog {
+  width: min(26rem, calc(100% - 2rem));
+  max-height: calc(100dvh - 2rem);
+  margin: auto;
+  border: 0;
+  border-radius: 1.5rem;
+  background: transparent;
+  color: var(--color-forest-ink);
+  padding: 0;
+}
+
+.contact-dialog::backdrop {
+  background: rgb(42 52 52 / 0.32);
+  backdrop-filter: blur(4px);
+}
+
+.contact-dialog__panel {
+  position: relative;
+  border-radius: inherit;
+  background: var(--color-white-sheet);
+  padding: 2rem;
+}
+
+.contact-dialog__close {
+  position: absolute;
+  inset-block-start: 1rem;
+  inset-inline-end: 1rem;
+  display: grid;
+  min-width: 44px;
+  min-height: 44px;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--color-mist-paper);
+}
+
+.contact-dialog__panel h2 {
+  max-width: 16rem;
+  padding-inline-end: 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.contact-dialog__panel p {
+  margin-block-start: 0.75rem;
+  color: var(--color-pine-shadow);
+  line-height: 1.5;
+}
+
+.contact-dialog__channels {
+  display: grid;
+  gap: 0.75rem;
+  margin-block-start: 1.5rem;
+}
+
+.contact-dialog__channels a {
+  display: flex;
+  min-height: 52px;
+  align-items: center;
+  gap: 0.875rem;
+  border: 1px solid rgb(42 52 52 / 0.14);
+  border-radius: 0.875rem;
+  padding: 0.875rem 1rem;
+  transition: border-color 200ms ease, background 200ms ease;
+}
+
+.contact-dialog__channels a:hover {
+  border-color: var(--color-chartreuse-sprig);
+  background: rgb(46 125 122 / 0.08);
+}
+
+.site-header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 40;
+  border-bottom: 1px solid rgb(42 52 52 / 0.08);
+  background: rgb(247 244 239 / 0.92);
+  backdrop-filter: blur(12px);
+}
+
+.site-nav {
+  display: grid;
+  min-height: 68px;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .site-nav {
+    padding-inline: 4rem;
+  }
+}
+
+.site-brand {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--color-forest-ink);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.site-nav__links,
+.site-nav__actions {
+  display: flex;
+  align-items: center;
+}
+
+.site-nav__links {
+  justify-content: center;
+  gap: clamp(1.25rem, 3vw, 3rem);
+}
+
+.site-nav__actions {
+  gap: 1rem;
+}
+
+.site-nav__links a,
+.site-nav__actions > a,
+.site-nav__contact,
+.mobile-menu-trigger,
+.mobile-menu__close,
+.mobile-menu__contact {
+  min-height: 44px;
+}
+
+.site-nav__links a,
+.site-nav__actions > a {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-forest-ink);
+  position: relative;
+  transition: color 200ms ease;
+}
+
+.site-nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 4px;
+  width: 100%;
+  height: 2px;
+  background: var(--color-chartreuse-sprig);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms ease;
+}
+
+.site-nav__links a:hover {
+  color: var(--color-sage-dust);
+}
+
+.site-nav__links a:hover::after {
+  transform: scaleX(1);
+}
+
+.site-nav__contact,
+.mobile-menu__contact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  background: var(--color-chartreuse-sprig);
+  color: var(--color-white-sheet);
+  padding-inline: 1.25rem;
+  font-weight: 600;
+  transition: background 200ms ease, box-shadow 200ms ease;
+}
+
+.site-nav__contact:hover,
+.mobile-menu__contact:hover {
+  background: var(--color-vivid-lime);
+  box-shadow: 0 4px 12px rgb(46 125 122 / 0.4);
+}
+
+.mobile-menu-trigger {
+  display: none;
+  min-width: 44px;
+  place-items: center;
+}
+
+.mobile-menu {
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  border: 0;
+  background: var(--color-mist-paper);
+  color: var(--color-forest-ink);
+  padding: 0;
+}
+
+.mobile-menu::backdrop {
+  background: var(--color-mist-paper);
+}
+
+.mobile-menu__panel {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  padding: 1.25rem;
+}
+
+.mobile-menu__close {
+  display: grid;
+  min-width: 44px;
+  align-self: flex-end;
+  place-items: center;
+  border-radius: 999px;
+}
+
+.mobile-menu__links {
+  display: grid;
+  gap: 0.5rem;
+  margin-block: auto;
+}
+
+.mobile-menu__links a {
+  padding-block: 0.5rem;
+  color: var(--color-forest-ink);
+  font-size: clamp(2rem, 10vw, 3rem);
+  font-weight: 600;
+  line-height: 1.1;
+  transition: color 200ms ease;
+}
+
+.mobile-menu__links a:hover {
+  color: var(--color-sage-dust);
+}
+
+.mobile-menu__panel > a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--color-sage-dust);
+}
+
+.mobile-menu__contact {
+  margin-block-start: 1rem;
+  min-height: 48px;
+}
+
+.faq-item {
+  border: 1px solid rgb(42 52 52 / 0.1);
+  border-radius: 1rem;
+  background: rgb(253 251 247 / 0.9);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.faq-item:hover {
+  border-color: rgb(42 52 52 / 0.2);
+  box-shadow: 0 4px 16px rgb(42 52 52 / 0.06);
+}
+
+.faq-item__trigger {
+  display: flex;
+  width: 100%;
+  min-height: 56px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem;
+  color: var(--color-forest-ink);
+  text-align: start;
+}
+
+.faq-item__icon {
+  flex: none;
+  transition: transform 150ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.faq-item--open .faq-item__icon {
+  transform: rotate(180deg);
+}
+
+.faq-item__panel {
+  padding: 0 1.25rem 1.25rem;
+}
+
+.faq-item__panel p {
+  max-width: 65ch;
+  border-top: 1px solid rgb(0 51 41 / 0.08);
+  padding-top: 1rem;
+  color: var(--color-pine-shadow);
+  line-height: 1.6;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: var(--color-sage-dust);
+  font-size: 0.875rem;
+  list-style: none;
+}
+
+.breadcrumbs li:not(:last-child)::after {
+  content: "/";
+  margin-inline-start: 0.5rem;
+}
+
+.service-article {
+  max-width: 48rem;
+}
+
+.service-article section + section {
+  margin-block-start: 4rem;
+}
+
+.service-article h2 {
+  color: var(--color-forest-ink);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1.05;
+}
+
+.service-article p,
+.service-article li {
+  color: var(--color-sage-dust);
+  font-size: clamp(1rem, 1.8vw, 1.125rem);
+  line-height: 1.65;
+}
+
+.service-article h2 + p,
+.service-article p + p,
+.service-article p + ul {
+  margin-block-start: 1.25rem;
+}
+
+.service-article ul {
+  display: grid;
+  gap: 0.75rem;
+  margin-block-start: 1.5rem;
+  padding-inline-start: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .related-services > div {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .site-nav {
+    min-height: 60px;
+    grid-template-columns: 1fr auto;
+    padding-inline: 1.25rem;
+  }
+
+  .site-nav__links,
+  .site-nav__actions {
+    display: none;
+  }
+
+  .mobile-menu-trigger {
+    display: grid;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .faq-item__icon {
+    transition: none;
+  }
 }

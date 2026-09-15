@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Showcase from "@/components/Showcase";
+import TrustStrip from "@/components/TrustStrip";
+import Needs from "@/components/Needs";
 import Services from "@/components/Services";
 import Process from "@/components/Process";
 import FAQ from "@/components/FAQ";
@@ -11,15 +12,16 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="flex flex-col flex-1 bg-mist-paper">
+      <main id="main-content" className="flex flex-col flex-1 bg-mist-paper">
         <Hero />
-        <Showcase />
+        <TrustStrip />
+        <Needs />
         <Services />
         <Process />
-        <FAQ />
         <About />
+        <FAQ />
+        <Footer />
       </main>
-      <Footer />
     </>
   );
 }

@@ -1,93 +1,42 @@
-"use client";
+import ContactTrigger from "./contact/ContactTrigger";
 
-import { useState } from "react";
-import AnimatedLink from "./AnimatedLink";
-import FloatingShape from "./FloatingShape";
-import Reveal from "./Reveal";
-import ContactPopup from "./ContactPopup";
-
-export default function About() {
-  const [popupOpen, setPopupOpen] = useState(false);
-
+export default function Studio() {
   return (
-    <section id="about" className="relative w-full bg-white-sheet py-24 md:py-40 px-6 md:px-16 lg:px-24 overflow-hidden">
-      <FloatingShape
-        type="seed"
-        size={80}
-        color="#52756e"
-        className="absolute top-[10%] right-[5%] opacity-10"
-        duration={10}
-        delay={-4}
-      />
-
-      <div className="w-full relative z-10">
-        <Reveal type="fade-up">
-          <div className="flex items-end justify-between border-b border-forest-ink/10 pb-6 mb-16 md:mb-24">
-            <h2 className="text-[16px] md:text-[20px] font-semibold uppercase tracking-widest text-forest-ink">
-              Ведущий специалист
-            </h2>
-            <span className="text-sage-dust text-[14px] md:text-[16px]">Kineto One</span>
-          </div>
-        </Reveal>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-12">
-          <Reveal type="fade-up" delay={0.1}>
-            <h3 className="text-forest-ink text-[8vw] md:text-[5vw] font-semibold leading-[0.9] tracking-tight">
-              Профессионализм<br />
-              <span className="italic-accent text-forest-ink">и забота о теле</span>,<br />
-              когда здоровье этого требует.
-            </h3>
-          </Reveal>
-
-          <div className="flex flex-col gap-8 text-[18px] md:text-[22px] leading-relaxed text-sage-dust md:pl-12">
-            <Reveal type="fade-up" delay={0.2}>
-              <p>
-                Kineto One — это практика ведущего специалиста, кинетотерапевта с более чем
-                8 годами опыта. Высшее медицинское образование, сертификация по
-                миофасциальному релизу и ортопедическому массажу.
-              </p>
-            </Reveal>
-
-            <Reveal type="fade-up" delay={0.3}>
-              <p>
-                Опыт разделён между клинической работой с травмами и тонким
-                подходом к расслаблению. Это даёт уникальный
-                метод — медицинская точность соединяется с заботой о каждом
-                человеке.
-              </p>
-            </Reveal>
-
-            <Reveal type="fade-up" delay={0.4}>
-              <p>
-                Мы не работаем по шаблону. Каждый сеанс начинается с диагностики —
-                мы находим причину, а не просто убираем симптомы. Тело само
-                знает, как восстановиться. Наша задача — помочь ему вспомнить.
-              </p>
-            </Reveal>
-
-            <Reveal type="fade-up" delay={0.5}>
-              <div className="flex flex-col gap-4 mt-8 pt-8 border-t border-forest-ink/10">
-                <span className="text-[14px] uppercase tracking-widest font-semibold text-forest-ink">Связаться</span>
-                <button 
-                  onClick={() => setPopupOpen(true)}
-                  className="text-left w-fit link-underline inline-flex items-center gap-2 group text-[20px] text-sage-dust hover:text-forest-ink transition-colors"
-                >
-                  Записаться на приём
-                </button>
-                <AnimatedLink href="https://t.me/+37369715536" external>Telegram</AnimatedLink>
-                <AnimatedLink href="https://www.instagram.com/kineto_one/" external>Instagram</AnimatedLink>
-                <AnimatedLink href="https://www.facebook.com/profile.php?id=61574692887644" external>Facebook</AnimatedLink>
-              </div>
-            </Reveal>
+    <section id="studio" className="bg-white-sheet py-20 md:py-32">
+      <div className="mx-auto max-w-[1200px] px-6 md:px-16">
+        <p className="text-sm font-medium uppercase tracking-widest text-sage-dust">
+          Студия
+        </p>
+        <div className="mt-6 grid gap-12 md:grid-cols-2">
+          <h2 className="text-3xl font-semibold leading-tight tracking-tight text-forest-ink md:text-5xl">
+            Подход, который строится на оценке и постепенной практике
+          </h2>
+          <div className="flex flex-col gap-6 text-lg leading-relaxed text-sage-dust">
+            <p>
+              Kineto One — это студия физической реабилитации в Кишинёве. Работа
+              ведётся с людьми разного возраста и уровня активности: от боли и
+              скованности до восстановления после травм, операций и
+              неврологических состояний.
+            </p>
+            <p>
+              Каждая встреча начинается с оценки текущего состояния. Программа
+              подбирается индивидуально и меняется по обратной связи. Студия не
+              заменяет медицинскую диагностику или лечение у врача, когда они
+              необходимы.
+            </p>
+            <p>
+              Цель — помочь телу постепенно вернуть движение и уверенность в
+              нагрузке, опираясь на профессиональную компетенцию и регулярный
+              контроль прогресса.
+            </p>
+            <div className="mt-4">
+              <ContactTrigger className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-chartreuse-sprig px-8 text-base font-semibold text-white-sheet shadow-sm transition-all duration-200 hover:bg-vivid-lime hover:shadow-md active:scale-[0.98] sm:w-auto sm:min-w-[200px]">
+                Связаться
+              </ContactTrigger>
+            </div>
           </div>
         </div>
       </div>
-
-      <ContactPopup 
-        isOpen={popupOpen} 
-        onClose={() => setPopupOpen(false)} 
-        showPhone={true}
-      />
     </section>
   );
 }
