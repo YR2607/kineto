@@ -22,7 +22,7 @@ describe("contact dialog", () => {
 
     expect(screen.getAllByRole("dialog")).toHaveLength(1);
     expect(
-      screen.getByRole("dialog", { name: "Связаться с Kineto One" }),
+      screen.getByRole("dialog", { name: "Записаться на первичную оценку" }),
     ).toBeVisible();
     expect(screen.getByRole("link", { name: "Позвонить" })).toHaveAttribute(
       "href",

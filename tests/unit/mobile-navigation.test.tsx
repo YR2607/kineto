@@ -31,7 +31,7 @@ describe("mobile navigation", () => {
       </ContactDialogProvider>,
     );
     await user.click(screen.getByRole("button", { name: "Открыть меню" }));
-    await user.click(screen.getAllByRole("link", { name: "Услуги" }).at(-1)!);
+    await user.click(screen.getAllByRole("link", { name: "Студия" }).at(-1)!);
     expect(screen.queryByRole("dialog", { name: "Навигация" })).not.toBeInTheDocument();
   });
 });

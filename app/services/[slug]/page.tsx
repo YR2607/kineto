@@ -86,7 +86,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <p className="mt-6 max-w-[560px] text-lg leading-relaxed text-sage-dust">
                 {service.subtitle}
               </p>
-              <ContactTrigger className="mt-8 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-chartreuse-sprig px-8 text-base font-semibold text-white-sheet shadow-sm transition-all duration-200 hover:bg-vivid-lime hover:shadow-md active:scale-[0.98] sm:w-auto sm:min-w-[200px]">
+              <ContactTrigger className="mt-8 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-chartreuse-sprig px-10 text-base font-semibold text-white-sheet shadow-sm transition-all duration-200 hover:bg-vivid-lime hover:shadow-md active:scale-[0.98] sm:w-auto sm:min-w-[200px]">
                 Связаться
               </ContactTrigger>
             </div>
@@ -112,7 +112,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <h2 className="max-w-[600px] text-2xl font-semibold leading-tight tracking-tight text-forest-ink md:text-3xl">
                 Хотите уточнить подходящее направление?
               </h2>
-              <ContactTrigger className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-chartreuse-sprig px-8 text-base font-semibold text-white-sheet shadow-sm transition-all duration-200 hover:bg-vivid-lime hover:shadow-md active:scale-[0.98] sm:w-auto sm:min-w-[200px]">
+              <ContactTrigger className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-chartreuse-sprig px-10 text-base font-semibold text-white-sheet shadow-sm transition-all duration-200 hover:bg-vivid-lime hover:shadow-md active:scale-[0.98] sm:w-auto sm:min-w-[200px]">
                 Связаться
               </ContactTrigger>
             </div>

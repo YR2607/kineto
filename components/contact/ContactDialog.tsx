@@ -2,27 +2,28 @@
 
 import { MessageCircle, Phone, Send, X } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { siteConfig } from "@/config/site";
 
 interface ContactDialogProps {
   onClose: () => void;
 }
 
 const channels = [
-  { href: "tel:+37369715536", label: "Позвонить", Icon: Phone },
+  { href: `tel:${siteConfig.phoneInternational}`, label: "Позвонить", Icon: Phone },
   {
-    href: "https://t.me/+37369715536",
+    href: siteConfig.channels.telegram,
     label: "Написать в Telegram",
     Icon: Send,
     external: true,
   },
   {
-    href: "https://wa.me/37369715536",
+    href: siteConfig.channels.whatsapp,
     label: "Написать в WhatsApp",
     Icon: MessageCircle,
     external: true,
   },
   {
-    href: "viber://chat?number=%2B37369715536",
+    href: siteConfig.channels.viber,
     label: "Написать в Viber",
     Icon: MessageCircle,
   },
@@ -62,9 +63,10 @@ export default function ContactDialog({ onClose }: ContactDialogProps) {
         >
           <X aria-hidden="true" size={18} strokeWidth={1.75} />
         </button>
-        <h2 id="contact-dialog-title">Связаться с Kineto One</h2>
+        <h2 id="contact-dialog-title">Записаться на первичную оценку</h2>
         <p id="contact-dialog-description">
-          Выберите удобный способ связи. Мы ответим и согласуем дальнейшие шаги.
+          Выберите удобный способ связи. Специалист ответит и согласует
+          дальнейшие шаги.
         </p>
         <div className="contact-dialog__channels">
           {channels.map(({ href, label, Icon, ...channel }) => {

@@ -1,44 +1,41 @@
 const steps = [
   {
     num: "01",
-    title: "Оценка",
+    title: "Сначала поговорим",
     description:
-      "На первой встрече специалист уточняет историю симптомов, оценивает доступный объём движения и обсуждает цели.",
+      "Вы рассказываете, что произошло, где болит и чего хотите достичь. Мы слушаем и уточняем детали.",
   },
   {
     num: "02",
-    title: "План",
+    title: "Проведём оценку",
     description:
-      "Подбирается индивидуальная последовательность упражнений и ручных техник в пределах профессиональной компетенции студии.",
+      "Проверим движение, силу, ограничения и реакцию на нагрузку. Это основа для плана.",
   },
   {
     num: "03",
-    title: "Практика",
+    title: "Составим план",
     description:
-      "Постепенная работа с нагрузкой и движением, рекомендации для самостоятельной практики между встречами.",
+      "Определим, над чем будем работать и какие шаги нужны именно вам. Без шаблонных программ.",
   },
   {
     num: "04",
-    title: "Контроль прогресса",
+    title: "Начнём восстановление",
     description:
-      "Регулярная оценка реакции на нагрузку и адаптация программы по обратной связи.",
+      "Постепенно увеличиваем нагрузку и отслеживаем изменения. Вы видите, как продвигаетесь.",
   },
 ];
 
 export default function Process() {
   return (
-    <section id="process" className="bg-mist-paper py-20 md:py-32">
+    <section id="process" className="bg-white-sheet py-20 md:py-32">
       <div className="mx-auto max-w-[1200px] px-6 md:px-16">
-        <p className="text-sm font-medium uppercase tracking-widest text-sage-dust">
-          Как проходит работа
-        </p>
-        <h2 className="mt-5 max-w-[800px] text-3xl font-semibold leading-tight tracking-tight text-forest-ink md:text-5xl">
-          Оценка, план, практика и контроль прогресса
+        <h2 className="text-3xl font-semibold leading-tight tracking-tight text-forest-ink md:text-5xl">
+          Как проходит реабилитация
         </h2>
-        <ol className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {steps.map((step) => (
-            <li key={step.num} className="flex flex-col">
-              <span className="text-sm font-medium tracking-widest text-sage-dust">
+        <ol className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {steps.map((step, idx) => (
+            <li key={step.num} className="relative flex flex-col">
+              <span className="text-sm font-semibold tracking-widest text-chartreuse-sprig">
                 {step.num}
               </span>
               <h3 className="mt-3 text-xl font-semibold text-forest-ink">
@@ -47,6 +44,12 @@ export default function Process() {
               <p className="mt-3 leading-relaxed text-sage-dust">
                 {step.description}
               </p>
+              {idx < steps.length - 1 && (
+                <span
+                  aria-hidden="true"
+                  className="mt-6 hidden h-px w-full bg-forest-ink/10 lg:block"
+                />
+              )}
             </li>
           ))}
         </ol>

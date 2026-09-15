@@ -7,10 +7,10 @@ test("contact dialog has one accessible instance and restores focus", async ({
   page,
 }) => {
   await page.goto("/");
-  const trigger = page.getByRole("button", { name: "Связаться" }).first();
+  const trigger = page.getByRole("button", { name: "Записаться" }).first();
   await trigger.click();
   await expect(
-    page.getByRole("dialog", { name: "Связаться с Kineto One" }),
+    page.getByRole("dialog", { name: "Записаться на первичную оценку" }),
   ).toHaveCount(1);
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).toHaveCount(0);
@@ -19,7 +19,9 @@ test("contact dialog has one accessible instance and restores focus", async ({
 
 test("faq toggles with keyboard", async ({ page }) => {
   await page.goto("/");
-  const question = page.getByRole("button", { name: "Сколько нужно занятий?" });
+  const question = page.getByRole("button", {
+    name: "Сколько занятий обычно требуется?",
+  });
   await question.focus();
   await page.keyboard.press("Enter");
   await expect(question).toHaveAttribute("aria-expanded", "true");

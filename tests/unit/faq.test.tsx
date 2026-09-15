@@ -1,11 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import FAQ from "@/components/FAQ";
-
-vi.mock("@/components/Reveal", () => ({
-  default: ({ children }: { children: React.ReactNode }) => children,
-}));
 
 describe("FAQ", () => {
   it("uses named buttons and synchronizes expanded state", async () => {
@@ -29,7 +25,7 @@ describe("FAQ", () => {
     const user = userEvent.setup();
     render(<FAQ />);
     const question = screen.getByRole("button", {
-      name: "Сколько нужно занятий?",
+      name: "Сколько занятий обычно требуется?",
     });
     question.focus();
     await user.keyboard("{Enter}");

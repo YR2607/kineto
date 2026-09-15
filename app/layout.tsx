@@ -35,8 +35,9 @@ export default function RootLayout({
           <JsonLd
             data={{
               "@context": "https://schema.org",
-              "@type": "Organization",
+              "@type": "MedicalBusiness",
               name: siteConfig.name,
+              description: siteConfig.description,
               ...(siteUrl ? { url: siteUrl.toString() } : {}),
               telephone: siteConfig.phoneInternational,
               address: {

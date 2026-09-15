@@ -1,95 +1,129 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
-import ContactTrigger from "./contact/ContactTrigger";
+import { getAllServices } from "@/data/services";
 
 export default function Footer() {
+  const services = getAllServices();
+  const navLinks = [
+    { href: "/#process", label: "Как проходит" },
+    { href: "/#specialist", label: "Специалист" },
+    { href: "/#results", label: "Результаты" },
+    { href: "/#studio", label: "Студия" },
+    { href: "/#pricing", label: "Стоимость" },
+    { href: "/#faq", label: "FAQ" },
+  ];
+
   return (
-    <footer id="contact" className="bg-mist-paper py-20 md:py-32">
+    <footer id="contact" className="bg-mist-paper py-16 md:py-24">
       <div className="mx-auto max-w-[1200px] px-6 md:px-16">
-        <div className="flex flex-col gap-12 md:flex-row md:justify-between">
-          <div className="flex flex-col gap-6">
-            <h2 className="text-3xl font-semibold leading-tight tracking-tight text-forest-ink md:text-5xl">
-              Готовы начать?
-            </h2>
-            <p className="max-w-[480px] text-lg leading-relaxed text-sage-dust">
-              Выберите удобный канал связи — специалист ответит на вопросы и
-              поможет определить подходящее направление.
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+          <div className="flex flex-col gap-4">
+            <span className="text-xl font-semibold text-forest-ink">
+              {siteConfig.name}
+            </span>
+            <p className="text-sm leading-relaxed text-sage-dust">
+              Студия физической реабилитации в Кишинёве. Индивидуальный подход к
+              восстановлению после травм, операций и боли.
             </p>
-            <ContactTrigger className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-chartreuse-sprig px-8 text-base font-semibold text-white-sheet shadow-sm transition-all duration-200 hover:bg-vivid-lime hover:shadow-md active:scale-[0.98] sm:w-auto sm:min-w-[200px]">
-              Связаться
-            </ContactTrigger>
           </div>
-          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:gap-12">
-            <div className="flex flex-col gap-3">
-              <span className="text-sm font-medium uppercase tracking-widest text-forest-ink">
-                Телефон
-              </span>
+          <div className="flex flex-col gap-3">
+            <span className="text-sm font-medium uppercase tracking-widest text-forest-ink">
+              Услуги
+            </span>
+            <ul className="flex flex-col gap-2">
+              {services.map((service) => (
+                <li key={service.slug}>
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="text-sm text-sage-dust underline-offset-4 transition-colors hover:text-forest-ink hover:underline"
+                  >
+                    {service.shortTitle}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="flex flex-col gap-3">
+            <span className="text-sm font-medium uppercase tracking-widest text-forest-ink">
+              Навигация
+            </span>
+            <ul className="flex flex-col gap-2">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-sage-dust underline-offset-4 transition-colors hover:text-forest-ink hover:underline"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="flex flex-col gap-3">
+            <span className="text-sm font-medium uppercase tracking-widest text-forest-ink">
+              Контакты
+            </span>
+            <Link
+              href={`tel:${siteConfig.phoneInternational}`}
+              className="text-base font-medium text-forest-ink underline-offset-4 transition-colors hover:text-chartreuse-sprig hover:underline"
+            >
+              {siteConfig.phoneDisplay}
+            </Link>
+            <span className="text-sm leading-relaxed text-sage-dust">
+              {siteConfig.address.street}
+              <br />
+              {siteConfig.address.city}, Moldova
+            </span>
+            <div className="flex flex-wrap gap-x-4 gap-y-2">
               <Link
-                href={`tel:${siteConfig.phoneInternational}`}
-                className="text-lg font-medium text-forest-ink underline-offset-4 transition-colors hover:text-sage-dust hover:underline"
+                href={siteConfig.channels.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-sage-dust underline-offset-4 transition-colors hover:text-forest-ink hover:underline"
               >
-                {siteConfig.phoneDisplay}
+                Telegram
               </Link>
-            </div>
-            <div className="flex flex-col gap-3">
-              <span className="text-sm font-medium uppercase tracking-widest text-forest-ink">
-                Адрес
-              </span>
-              <span className="text-lg leading-relaxed text-sage-dust">
-                {siteConfig.address.street}
-                <br />
-                {siteConfig.address.city}, Moldova
-              </span>
-            </div>
-            <div className="flex flex-col gap-3">
-              <span className="text-sm font-medium uppercase tracking-widest text-forest-ink">
-                Каналы связи
-              </span>
-              <div className="flex flex-col gap-2">
-                <Link
-                  href={siteConfig.channels.telegram}
-                  className="text-lg text-sage-dust underline-offset-4 transition-colors hover:text-forest-ink hover:underline"
-                >
-                  Telegram
-                </Link>
-                <Link
-                  href={siteConfig.channels.whatsapp}
-                  className="text-lg text-sage-dust underline-offset-4 transition-colors hover:text-forest-ink hover:underline"
-                >
-                  WhatsApp
-                </Link>
-                <Link
-                  href={siteConfig.channels.viber}
-                  className="text-lg text-sage-dust underline-offset-4 transition-colors hover:text-forest-ink hover:underline"
-                >
-                  Viber
-                </Link>
-              </div>
-            </div>
-            <div className="flex flex-col gap-3">
-              <span className="text-sm font-medium uppercase tracking-widest text-forest-ink">
-                Соцсети
-              </span>
-              <div className="flex flex-col gap-2">
-                <Link
-                  href={siteConfig.channels.instagram}
-                  className="text-lg text-sage-dust underline-offset-4 transition-colors hover:text-forest-ink hover:underline"
-                >
-                  Instagram
-                </Link>
-                <Link
-                  href={siteConfig.channels.facebook}
-                  className="text-lg text-sage-dust underline-offset-4 transition-colors hover:text-forest-ink hover:underline"
-                >
-                  Facebook
-                </Link>
-              </div>
+              <Link
+                href={siteConfig.channels.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-sage-dust underline-offset-4 transition-colors hover:text-forest-ink hover:underline"
+              >
+                WhatsApp
+              </Link>
+              <Link
+                href={siteConfig.channels.viber}
+                className="text-sm text-sage-dust underline-offset-4 transition-colors hover:text-forest-ink hover:underline"
+              >
+                Viber
+              </Link>
+              <Link
+                href={siteConfig.channels.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-sage-dust underline-offset-4 transition-colors hover:text-forest-ink hover:underline"
+              >
+                Instagram
+              </Link>
+              <Link
+                href={siteConfig.channels.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-sage-dust underline-offset-4 transition-colors hover:text-forest-ink hover:underline"
+              >
+                Facebook
+              </Link>
             </div>
           </div>
         </div>
-        <div className="mt-16 flex flex-col gap-4 border-t border-forest-ink/10 pt-8 text-sm text-pine-shadow md:flex-row md:justify-between">
-          <span>© 2026 {siteConfig.name}.</span>
-          <span>Студия физической реабилитации, Кишинёв</span>
+        <div className="mt-12 flex flex-col gap-4 border-t border-forest-ink/10 pt-8 text-sm text-pine-shadow md:flex-row md:justify-between">
+          <span>© 2026 {siteConfig.name}. Студия физической реабилитации, Кишинёв.</span>
+          <div className="flex gap-4">
+            <span className="font-semibold text-forest-ink">RU</span>
+            <span className="text-sage-dust">RO</span>
+            <span className="text-sage-dust">EN</span>
+          </div>
         </div>
       </div>
     </footer>

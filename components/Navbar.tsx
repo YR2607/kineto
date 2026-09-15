@@ -1,38 +1,54 @@
-import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import ContactTrigger from "@/components/contact/ContactTrigger";
+import { siteConfig } from "@/config/site";
+import ContactTrigger from "./contact/ContactTrigger";
 import MobileNavigation from "./MobileNavigation";
 
-const links = [
-  { href: "/#needs", label: "С чем помогаем" },
-  { href: "/#services", label: "Услуги" },
+const navLinks = [
+  { href: "/#process", label: "Как проходит" },
+  { href: "/#specialist", label: "Специалист" },
+  { href: "/#results", label: "Результаты" },
   { href: "/#studio", label: "Студия" },
-  { href: "/#contact", label: "Контакты" },
-] as const;
+  { href: "/#pricing", label: "Стоимость" },
+  { href: "/#faq", label: "FAQ" },
+];
 
 export default function Navbar() {
   return (
     <header className="site-header">
-      <nav aria-label="Основная навигация" className="site-nav">
-        <Link href="/" className="site-brand">
-          Kineto One
+      <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-4 px-6 py-4 md:px-16">
+        <Link
+          href="/"
+          className="text-xl font-semibold tracking-tight text-forest-ink"
+          aria-label={`${siteConfig.name} — на главную`}
+        >
+          {siteConfig.name}
         </Link>
-        <div className="site-nav__links">
-          {links.map((link) => (
-            <Link key={link.href} href={link.href}>
-              {link.label}
-            </Link>
-          ))}
-        </div>
-        <div className="site-nav__actions">
-          <a href="tel:+37369715536">0697 15 536</a>
-          <ContactTrigger className="site-nav__contact">
-            Связаться
-            <ArrowUpRight aria-hidden="true" size={16} strokeWidth={1.75} />
+        <nav className="hidden lg:flex" aria-label="Основная навигация">
+          <ul className="flex items-center gap-7">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="site-nav__link text-sm font-medium text-pine-shadow transition-colors hover:text-chartreuse-sprig"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="hidden lg:flex items-center gap-4">
+          <div className="flex gap-2 text-sm">
+            <span className="font-semibold text-forest-ink">RU</span>
+            <span className="text-sage-dust">RO</span>
+            <span className="text-sage-dust">EN</span>
+          </div>
+          <ContactTrigger className="site-nav__cta inline-flex min-h-11 items-center justify-center rounded-full bg-chartreuse-sprig px-6 text-sm font-semibold text-white-sheet shadow-sm transition-all duration-200 hover:bg-vivid-lime hover:shadow-md active:scale-[0.98]">
+            Записаться
           </ContactTrigger>
         </div>
-        <MobileNavigation links={links} />
-      </nav>
+        <MobileNavigation links={navLinks} />
+      </div>
     </header>
   );
 }

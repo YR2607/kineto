@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import ContactTrigger from "@/components/contact/ContactTrigger";
+import { siteConfig } from "@/config/site";
 
 interface MobileNavigationProps {
   links: ReadonlyArray<{ href: string; label: string }>;
@@ -61,12 +62,14 @@ export default function MobileNavigation({ links }: MobileNavigationProps) {
                 </Link>
               ))}
             </nav>
-            <a href="tel:+37369715536">0697 15 536</a>
+            <a href={`tel:${siteConfig.phoneInternational}`}>
+              {siteConfig.phoneDisplay}
+            </a>
             <ContactTrigger
               onClick={close}
               className="mobile-menu__contact"
             >
-              Связаться
+              Записаться
             </ContactTrigger>
           </div>
         </dialog>

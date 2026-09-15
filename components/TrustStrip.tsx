@@ -1,27 +1,48 @@
-const facts = [
-  { label: "Студия", value: "Kineto One" },
-  { label: "Город", value: "Chișinău" },
-  { label: "Направлений", value: "8" },
-  { label: "Каналов связи", value: "5" },
+const advantages = [
+  {
+    title: "Индивидуальный подход",
+    description:
+      "Программа подбирается под ваше состояние, цели и темп восстановления.",
+  },
+  {
+    title: "Работа с причиной",
+    description:
+      "Оцениваем не только симптом, но и его источник, чтобы влиять на основание проблемы.",
+  },
+  {
+    title: "Контроль прогресса",
+    description:
+      "Регулярно отслеживаем изменения и адаптируем нагрузку по обратной связи.",
+  },
+  {
+    title: "Возвращение к жизни",
+    description:
+      "Цель не просто снять боль, а вернуть движение, уверенность и способность к нагрузке.",
+  },
 ];
 
 export default function TrustStrip() {
   return (
     <section
-      aria-label="О студии"
-      className="border-y border-forest-ink/10 bg-white-sheet"
+      aria-label="Почему Kineto One"
+      className="border-y border-forest-ink/10 bg-mist-paper"
     >
-      <div className="mx-auto grid max-w-[1200px] grid-cols-2 gap-px px-6 py-10 md:grid-cols-4 md:px-16">
-        {facts.map((fact) => (
-          <div key={fact.label} className="flex flex-col gap-1 md:px-6">
-            <span className="text-sm font-medium uppercase tracking-widest text-sage-dust">
-              {fact.label}
-            </span>
-            <span className="text-2xl font-semibold text-forest-ink md:text-3xl">
-              {fact.value}
-            </span>
-          </div>
-        ))}
+      <div className="mx-auto max-w-[1200px] px-6 py-16 md:px-16 md:py-20">
+        <h2 className="text-2xl font-semibold tracking-tight text-forest-ink md:text-3xl">
+          Почему Kineto One
+        </h2>
+        <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {advantages.map((advantage) => (
+            <div key={advantage.title} className="flex flex-col gap-3">
+              <h3 className="text-lg font-semibold text-forest-ink">
+                {advantage.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-sage-dust">
+                {advantage.description}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
